@@ -1,0 +1,78 @@
+//half angled Triangle
+namespace string_assignment
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the Number of Rows you wanted to print Triangle :");
+            int rows = int.Parse(Console.ReadLine());
+
+            for (int i = 1; i <= rows; i++)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write("*");
+                }
+
+                Console.WriteLine();
+            }
+                  }
+    }
+       
+}
+
+//half angled triangle with numbers
+namespace string_assignment
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+          Console.WriteLine("Enter the Number of Rows you wanted to print Triangle :");
+          int rows = int.Parse(Console.ReadLine());
+          int number = 1;
+
+          for (int i = 1; i <= rows; i++)
+          {
+             for (int j = 1; j <= i; j++)
+               {
+                  Console.Write(number + " ");
+                   number++;
+           }
+
+          Console.WriteLine();
+ }
+                  }
+    }
+       
+}
+
+
+//checking vowels
+namespace string_assignment
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+                Console.Write("Enter the String :");
+               string input = Console.ReadLine();
+
+                 Vowels(input);
+
+    }
+    static void Vowels(string input) 
+    {
+        string lowerinput = input.ToLower();
+        foreach (char  c in lowerinput) 
+        {
+           if ("aeiou".Contains(c))
+            {
+                Console.Write(c);
+            }
+            
+    }
+}
+   
+}
