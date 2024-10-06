@@ -1,0 +1,60 @@
+//sum of "10_200_3_1"
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace assignment
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = "10_200_3_1";
+            int sumOfNumbers = 0;
+            string currentNumber = "";
+
+            
+            for (int i = 0; i < input.Length; i++)
+            {
+                char currentChar = input[i];
+
+               
+                if (char.IsDigit(currentChar))
+                {
+                    
+                    currentNumber += currentChar;
+                }
+                else if (currentChar == '_') 
+                {
+                    
+                    if (currentNumber != "")
+                    {
+                        sumOfNumbers += int.Parse(currentNumber);
+                        currentNumber = ""; 
+                    }
+                }
+            }
+
+            
+            if (currentNumber != "")
+            {
+                sumOfNumbers += int.Parse(currentNumber);
+            }
+
+            Console.WriteLine("Sum of numbers: " + sumOfNumbers);
+        }
+    }
+}
+
+
+
+
+
+
+
+
