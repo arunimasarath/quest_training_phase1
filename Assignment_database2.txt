@@ -1,0 +1,38 @@
+Normalization is a database design process that organizes data to minimize redundancy and dependency by dividing a database into smaller, related tables. This process involves defining relationships between these tables and ensuring that data is stored efficiently. The main goals of normalization are:
+
+1.Eliminate Redundant Data: Reduce duplication of data across the database to save space and ensure consistency.
+2.Ensure Data Dependencies: Maintain logical data dependencies by ensuring that only related data is stored together. This prevents anomalies during data operations (insertions, updates, deletions).
+3.Improve Data Integrity: By organizing data into appropriate tables and establishing relationships, normalization helps ensure the accuracy and reliability of the data.
+
+Normal Forms
+Normalization is usually categorized into different "normal forms" (NF). Here are the first three normal forms:
+
+First Normal Form (1NF):
+
+Each table has a primary key.
+Each column contains atomic (indivisible) values.
+Each entry in a column is of the same data type.
+Example: A table containing multiple phone numbers in a single field violates 1NF.
+
+Second Normal Form (2NF):
+
+It is in 1NF.
+All non-key attributes are fully functionally dependent on the primary key (no partial dependency).
+Example: In a table where a composite key is used, all non-key attributes should depend on the entire composite key, not just part of it.
+
+Third Normal Form (3NF):
+
+It is in 2NF.
+There are no transitive dependencies (a non-key attribute should not depend on another non-key attribute).
+Example: If a table has attributes A, B, and C, and C depends on B (which is not a primary key), then the table violates 3NF.
+
+Benefits of Normalization
+Reduced Data Redundancy: Fewer duplicates in the database lead to less storage space used.
+Increased Data Integrity: Changes in one part of the database automatically update related data, reducing the chance of inconsistencies.
+Easier Maintenance: Smaller tables with clear relationships make it easier to manage and maintain the database.
+Improved Query Performance: A well-structured database can lead to better performance in data retrieval operations.
+
+
+Drawbacks of Normalization
+Complex Queries: Normalization can lead to complex queries, as data may be spread across multiple tables.
+Performance Overhead: In some cases, normalized databases can be slower for read-heavy operations since they require more joins.

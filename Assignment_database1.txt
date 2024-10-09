@@ -1,0 +1,54 @@
+CREATE TABLE student (
+    id BIGINT PRIMARY KEY IDENTITY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE
+);
+INSERT INTO student (name, email)
+VALUES ('Arunima', 'arunima@gmail.com'),
+       ('Clement', 'clement@gmail.com'),
+       ('Mudasir', 'mudasir@gmail.com'),
+       ('Theertha', 'theertha@gmail.com'),
+       ('Samyuktha', 'samyuktha@gmail.com');
+CREATE TABLE subject (
+    Subject_Code VARCHAR(50) PRIMARY KEY,     
+    Subject_Name VARCHAR(50) NOT NULL         
+);
+INSERT INTO subject (Subject_Code, Subject_Name)
+VALUES ('MATH101', 'Mathematics'),
+       ('PHY101', 'Physics');
+CREATE TABLE exam (
+    exam_id BIGINT PRIMARY KEY IDENTITY,      
+    exam_name VARCHAR(100) NOT NULL,          
+    min_marks INT NOT NULL,                    
+    max_marks INT NOT NULL                     
+);
+INSERT INTO exam (exam_name, min_marks, max_marks)
+VALUES ('Midterm 1', 20, 80),
+       ('Midterm 2', 50, 90),
+       ('Midterm 3', 45, 95),
+       ('Midterm 4', 47, 92),
+       ('Midterm 5', 60, 94);
+CREATE TABLE MARKS (
+    mark_id BIGINT PRIMARY KEY IDENTITY,     
+    exam_id BIGINT NOT NULL,                  
+    Subject_Code VARCHAR(10) NOT NULL,        
+    StudentId BIGINT NOT NULL,               
+    Mark INT NOT NULL,
+  
+    CONSTRAINT FK_Marks_ExamId FOREIGN KEY (exam_id) REFERENCES exam(exam_id),
+    CONSTRAINT FK_Marks_SubjectCode FOREIGN KEY (Subject_Code) REFERENCES subject(Subject_Code),
+    CONSTRAINT FK_Marks_StudentId FOREIGN KEY (StudentId) REFERENCES student(id)
+);
+
+
+INSERT INTO MARKS (exam_id, Subject_Code, StudentId, Mark)
+VALUES (1, 'MATH101', 1, 85),  
+       (1, 'PHY101', 1, 90),
+       (2, 'MATH101', 2, 89),  
+       (2, 'PHY101', 2, 72),
+       (3, 'MATH101', 3, 88),  
+       (3, 'PHY101', 3, 70),
+       (4, 'MATH101', 4, 81),  
+       (4, 'PHY101', 4, 90),
+       (5, 'MATH101', 5, 75),  
+       (5, 'PHY101', 5, 90);
