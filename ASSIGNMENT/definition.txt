@@ -1,0 +1,29 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter the height of the rectangle: ");
+        
+        
+        int height;
+        while (!int.TryParse(Console.ReadLine(), out height) || height <= 0)
+        {
+            Console.Write("Please enter a valid positive integer for height: ");
+        }
+
+        // Width can be defined; you can modify this value as needed
+        int width = 10;
+
+        // Print the rectangle
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                Console.Write("*");
+            }
+            Console.WriteLine(); // Move to the next line after each row
+        }
+    }
+}

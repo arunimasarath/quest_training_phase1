@@ -1,0 +1,193 @@
+1. SELECT:
+Used to retrieve data from a database.
+
+Example:
+
+sql
+Copy code
+SELECT FirstName, LastName
+FROM Employees;
+This query selects the FirstName and LastName columns from the Employees table.
+
+2. WHERE:
+Used to filter records that meet a specific condition.
+
+Example:
+
+sql
+Copy code
+SELECT FirstName, LastName
+FROM Employees
+WHERE Department = 'Sales';
+This query retrieves employees who work in the Sales department.
+
+3. ORDER BY:
+Used to sort the result set in ascending or descending order.
+
+Example:
+
+sql
+Copy code
+SELECT FirstName, LastName
+FROM Employees
+ORDER BY LastName ASC;
+This query orders the employees by their last name in ascending order.
+
+4. GROUP BY:
+Used to group rows that have the same values into summary rows, like aggregating data.
+
+Example:
+
+sql
+Copy code
+SELECT Department, COUNT(*)
+FROM Employees
+GROUP BY Department;
+This query returns the number of employees in each department.
+
+5. INSERT INTO:
+Used to insert new records into a table.
+
+Example:
+
+sql
+Copy code
+INSERT INTO Employees (FirstName, LastName, Department)
+VALUES ('John', 'Doe', 'Marketing');
+This query inserts a new employee record into the Employees table.
+
+6. UPDATE:
+Used to modify existing records in a table.
+
+Example:
+
+sql
+Copy code
+UPDATE Employees
+SET Department = 'HR'
+WHERE EmployeeID = 123;
+This query updates the department of the employee with EmployeeID 123 to 'HR'.
+
+7. DELETE:
+Used to delete records from a table.
+
+Example:
+
+sql
+Copy code
+DELETE FROM Employees
+WHERE EmployeeID = 123;
+This query deletes the employee record where the EmployeeID is 123.
+
+8. TRUNCATE:
+Used to remove all records from a table, but it keeps the structure of the table.
+
+Example:
+
+sql
+Copy code
+TRUNCATE TABLE Employees;
+This query removes all rows from the Employees table but keeps the table itself.
+
+9. ALTER:
+Used to modify the structure of an existing table, such as adding or deleting columns.
+
+Example:
+
+sql
+Copy code
+ALTER TABLE Employees
+ADD DateOfBirth DATE;
+This query adds a new DateOfBirth column to the Employees table.
+
+Another example:
+
+sql
+Copy code
+ALTER TABLE Employees
+DROP COLUMN DateOfBirth;
+This query removes the DateOfBirth column from the Employees table.
+
+
+
+
+2. Different types of Join
+
+In SQL, joins are used to combine rows from two or more tables based on a related column between them. Here are the different types of joins:
+
+1. INNER JOIN:
+Returns records that have matching values in both tables.
+
+Example:
+
+sql
+Copy code
+SELECT Employees.FirstName, Departments.DepartmentName
+FROM Employees
+INNER JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID;
+This query retrieves employees and their corresponding department names, but only if the DepartmentID exists in both the Employees and Departments tables.
+
+2. LEFT JOIN (or LEFT OUTER JOIN):
+Returns all records from the left table (Employees), and the matched records from the right table (Departments). The result is NULL from the right side if there is no match.
+
+Example:
+
+sql
+Copy code
+SELECT Employees.FirstName, Departments.DepartmentName
+FROM Employees
+LEFT JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID;
+This query retrieves all employees, and if an employee does not have a matching department, it will still return the employee with NULL in the DepartmentName.
+
+3. RIGHT JOIN (or RIGHT OUTER JOIN):
+Returns all records from the right table (Departments), and the matched records from the left table (Employees). The result is NULL from the left side if there is no match.
+
+Example:
+
+sql
+Copy code
+SELECT Employees.FirstName, Departments.DepartmentName
+FROM Employees
+RIGHT JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID;
+This query retrieves all departments, and if a department does not have an associated employee, the result will show NULL in the FirstName column.
+
+4. FULL JOIN (or FULL OUTER JOIN):
+Returns all records when there is a match in either the left or right table. If there is no match, it will return NULL for missing matches on either side.
+
+Example:
+
+sql
+Copy code
+SELECT Employees.FirstName, Departments.DepartmentName
+FROM Employees
+FULL OUTER JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID;
+This query retrieves all employees and departments. If an employee doesn’t belong to any department, or a department has no employees, the result will include NULL for the missing values.
+
+5. CROSS JOIN:
+Returns the Cartesian product of the two tables, meaning every row from the first table is combined with every row from the second table.
+
+Example:
+
+sql
+Copy code
+SELECT Employees.FirstName, Departments.DepartmentName
+FROM Employees
+CROSS JOIN Departments;
+This query combines each employee with every department, regardless of any relationship.
+
+6. SELF JOIN:
+A self join is when a table is joined with itself. This is useful when you want to compare rows within the same table.
+
+Example:
+
+sql
+Copy code
+SELECT A.FirstName AS Employee1, B.FirstName AS Employee2
+FROM Employees A
+INNER JOIN Employees B
+ON A.ManagerID = B.EmployeeID;
+This query returns employees and their managers (assuming that the ManagerID column links employees to their managers within the same table).

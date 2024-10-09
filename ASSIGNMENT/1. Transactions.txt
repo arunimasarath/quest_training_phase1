@@ -1,0 +1,153 @@
+1. Transactions:
+A transaction in SQL Server is a sequence of operations that are treated as a single logical unit of work. The operations either all succeed, or none of them are applied to the database, ensuring data integrity.
+
+Important Commands for Transactions:
+BEGIN TRANSACTION: Starts a transaction.
+COMMIT: Saves the changes made in the transaction.
+ROLLBACK: Reverts the changes made in the transaction.
+Example:
+sql
+Copy code
+BEGIN TRANSACTION;
+
+UPDATE Accounts
+SET Balance = Balance - 500
+WHERE AccountID = 1;
+
+UPDATE Accounts
+SET Balance = Balance + 500
+WHERE AccountID = 2;
+
+IF @@ERROR <> 0
+    ROLLBACK;
+ELSE
+    COMMIT;
+In this example:
+
+The transaction starts by transferring 500 units from AccountID = 1 to AccountID = 2.
+If any part of the transaction fails (checked by @@ERROR), the transaction is rolled back, undoing any changes.
+If all operations succeed, the transaction is committed, making the changes permanent.
+2. Stored Procedures:
+A stored procedure is a precompiled collection of SQL statements that can be executed as a single unit. Stored procedures allow you to encapsulate business logic and perform complex operations with a single call.
+
+Benefits of Stored Procedures:
+Reusability: Procedures can be used by multiple applications.
+Performance: Since they are precompiled, stored procedures run faster.
+Security: Stored procedures can be used to control access to the data.
+Example:
+sql
+Copy code
+CREATE PROCEDURE GetEmployeeDetails
+    @EmployeeID INT
+AS
+BEGIN
+    SELECT FirstName, LastName, Department, Salary
+    FROM Employees
+    WHERE EmployeeID = @EmployeeID;
+END;
+This stored procedure, named GetEmployeeDetails, takes an @EmployeeID as a parameter and retrieves details of the employee with that ID.
+
+To execute this stored procedure:
+
+sql
+Copy code
+EXEC GetEmployeeDetails @EmployeeID = 101;
+Another Example (with multiple parameters and logic):
+sql
+Copy code
+CREATE PROCEDURE TransferFunds
+    @FromAccount INT,
+    @ToAccount INT,
+    @Amount DECIMAL(10, 2)
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    UPDATE Accounts
+    SET Balance = Balance - @Amount
+    WHERE AccountID = @FromAccount;
+
+    UPDATE Accounts
+    SET Balance = Balance + @Amount
+    WHERE AccountID = @ToAccount;
+
+    IF @@ERROR <> 0
+    BEGIN
+        ROLLBACK;
+        PRINT 'Transaction Failed';
+    END
+    ELSE
+    BEGIN
+        COMMIT;
+        PRINT 'Transaction Successful';
+    END
+END;
+This stored procedure transfers funds from one account to another. It includes transaction management and error handling.
+
+3. Triggers:
+A trigger is a special kind of stored procedure that automatically executes (or "fires") in response to certain events on a table or view, such as INSERT, UPDATE, or DELETE.
+
+Types of Triggers:
+AFTER Trigger: Executes after the triggering event.
+INSTEAD OF Trigger: Executes in place of the triggering event.
+Example 1: AFTER INSERT Trigger:
+This trigger executes after a new record is inserted into the Orders table.
+
+sql
+Copy code
+CREATE TRIGGER trg_AfterInsertOrder
+ON Orders
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @OrderID INT;
+    SELECT @OrderID = INSERTED.OrderID FROM INSERTED;
+
+    INSERT INTO OrderAudit (OrderID, Action, AuditDate)
+    VALUES (@OrderID, 'INSERT', GETDATE());
+END;
+This trigger:
+
+Captures the OrderID from the newly inserted row.
+Inserts an audit record into the OrderAudit table to track that a new order was added.
+Example 2: AFTER UPDATE Trigger:
+This trigger logs changes made to the Employees table.
+
+sql
+Copy code
+CREATE TRIGGER trg_AfterUpdateEmployee
+ON Employees
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @EmpID INT, @OldSalary DECIMAL(10,2), @NewSalary DECIMAL(10,2);
+
+    SELECT @EmpID = INSERTED.EmployeeID, @OldSalary = DELETED.Salary, @NewSalary = INSERTED.Salary
+    FROM INSERTED INNER JOIN DELETED ON INSERTED.EmployeeID = DELETED.EmployeeID;
+
+    INSERT INTO SalaryAudit (EmployeeID, OldSalary, NewSalary, ChangeDate)
+    VALUES (@EmpID, @OldSalary, @NewSalary, GETDATE());
+END;
+This trigger:
+
+Captures the EmployeeID, old salary (DELETED), and new salary (INSERTED) after an update.
+Inserts this information into a SalaryAudit table to track salary changes.
+Example 3: INSTEAD OF DELETE Trigger:
+This trigger can prevent accidental deletion of records and provide custom logic instead.
+
+sql
+Copy code
+CREATE TRIGGER trg_InsteadOfDelete
+ON Employees
+INSTEAD OF DELETE
+AS
+BEGIN
+    PRINT 'Deletion is not allowed on the Employees table';
+END;
+This trigger:
+
+Prevents deletions on the Employees table by executing a message instead of the actual deletion.
+Key Differences:
+Transactions: Group multiple SQL operations into a unit of work to ensure all operations succeed or fail together.
+Stored Procedures: Precompiled SQL statements that can be reused and executed with different parameters to perform a variety of operations.
+Triggers: Automatically execute in response to data changes in a table (like an INSERT, UPDATE, or DELETE operation) and can be used for tasks like auditing, enforcing business rules, or cascading changes.

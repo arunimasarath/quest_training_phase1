@@ -1,0 +1,99 @@
+1. DISTINCT:
+The DISTINCT keyword is used to return only unique (different) values in the result set, removing duplicates.
+
+Example:
+
+sql
+Copy code
+SELECT DISTINCT Department
+FROM Employees;
+This query retrieves a unique list of departments from the Employees table, filtering out any duplicates.
+
+2. CREATE INDEX:
+Indexes are used to speed up the retrieval of rows by creating a quick lookup for rows in a table based on one or more columns. Indexes are especially useful for large datasets.
+
+Types of Indexes:
+Unique Index: Ensures no duplicate values are allowed in the indexed column.
+Non-Unique Index: Allows duplicate values and helps speed up queries.
+Example:
+
+Creating a Non-Unique Index:
+sql
+Copy code
+CREATE INDEX idx_employee_lastname
+ON Employees (LastName);
+This query creates an index called idx_employee_lastname on the LastName column of the Employees table to improve query performance when searching by last name.
+
+Creating a Unique Index:
+sql
+Copy code
+CREATE UNIQUE INDEX idx_employee_id
+ON Employees (EmployeeID);
+This query creates a unique index on the EmployeeID column, ensuring no two employees can have the same EmployeeID.
+
+3. Subqueries:
+A subquery (or inner query) is a query within another query. It can be used in various parts of an SQL query such as the SELECT, FROM, or WHERE clause.
+
+Types of Subqueries:
+Single-Row Subquery: Returns only one row.
+Multi-Row Subquery: Returns multiple rows.
+Correlated Subquery: A subquery that references columns from the outer query.
+3.1 Single-Row Subquery:
+A subquery that returns a single value.
+
+Example:
+
+sql
+Copy code
+SELECT FirstName, LastName
+FROM Employees
+WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+This query retrieves the names of employees whose salary is greater than the average salary of all employees. The subquery (SELECT AVG(Salary) FROM Employees) returns a single value (the average salary).
+
+3.2 Multi-Row Subquery:
+A subquery that returns multiple rows and is typically used with operators like IN, ANY, or ALL.
+
+Example:
+
+sql
+Copy code
+SELECT FirstName, LastName
+FROM Employees
+WHERE DepartmentID IN (SELECT DepartmentID FROM Departments WHERE Location = 'New York');
+This query retrieves the names of employees who work in departments located in New York. The subquery returns multiple department IDs.
+
+3.3 Correlated Subquery:
+A subquery that depends on the outer query for its values. This means that the subquery is executed once for each row processed by the outer query.
+
+Example:
+
+sql
+Copy code
+SELECT E1.FirstName, E1.LastName
+FROM Employees E1
+WHERE E1.Salary > (SELECT AVG(E2.Salary) 
+                   FROM Employees E2
+                   WHERE E1.DepartmentID = E2.DepartmentID);
+This query retrieves employees whose salary is higher than the average salary in their respective department. The subquery refers to the E1.DepartmentID from the outer query, making it a correlated subquery.
+
+Subquery Placement:
+In the SELECT clause:
+
+sql
+Copy code
+SELECT FirstName, LastName, 
+       (SELECT DepartmentName FROM Departments WHERE DepartmentID = Employees.DepartmentID) AS DepartmentName
+FROM Employees;
+The subquery retrieves the DepartmentName from the Departments table for each employee in the Employees table.
+
+In the FROM clause:
+
+sql
+Copy code
+SELECT E.FirstName, E.LastName, D.DepartmentName
+FROM Employees E
+INNER JOIN (SELECT DepartmentID, DepartmentName FROM Departments WHERE Location = 'New York') D
+ON E.DepartmentID = D.DepartmentID;
+The subquery in the FROM clause creates an inline view (D) that only includes departments located in New York, which is then joined to the Employees table.
+
+es all employees and departments. If an employee doesn’t belong to any department, or a department has no employees, the 

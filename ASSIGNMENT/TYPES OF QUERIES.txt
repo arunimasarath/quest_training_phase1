@@ -1,0 +1,152 @@
+SQL is divided into different types of queries based on their functionality. These categories are often referred to as SQL sublanguages. Below are the types of queries in SQL, including DDL, DML, DCL, TCL, and DQL, with explanations and examples:
+
+1. DDL (Data Definition Language):
+DDL commands are used to define, alter, and manage the structure of database objects like tables, indexes, and schemas. These commands affect the database schema.
+
+Common DDL Commands:
+CREATE: Used to create objects (tables, views, indexes).
+ALTER: Used to modify existing objects.
+DROP: Deletes database objects.
+TRUNCATE: Deletes all records from a table but retains the table structure.
+RENAME: Renames a database object.
+Examples:
+Creating a table:
+
+sql
+Copy code
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Salary DECIMAL(10, 2)
+);
+Altering a table (adding a new column):
+
+sql
+Copy code
+ALTER TABLE Employees
+ADD DepartmentID INT;
+Dropping a table:
+
+sql
+Copy code
+DROP TABLE Employees;
+Truncating a table (removes all data):
+
+sql
+Copy code
+TRUNCATE TABLE Employees;
+2. DML (Data Manipulation Language):
+DML commands are used to manipulate the data within the database. These commands allow you to perform operations like inserting, updating, or deleting data from tables.
+
+Common DML Commands:
+INSERT: Adds new records to a table.
+UPDATE: Modifies existing records in a table.
+DELETE: Removes specific records from a table.
+Examples:
+Inserting data into a table:
+
+sql
+Copy code
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Salary)
+VALUES (101, 'John', 'Doe', 55000.00);
+Updating records in a table:
+
+sql
+Copy code
+UPDATE Employees
+SET Salary = 60000.00
+WHERE EmployeeID = 101;
+Deleting records from a table:
+
+sql
+Copy code
+DELETE FROM Employees
+WHERE EmployeeID = 101;
+3. DCL (Data Control Language):
+DCL commands are used to control access to data within the database. These commands grant or revoke privileges to users and roles.
+
+Common DCL Commands:
+GRANT: Gives users or roles access to database objects.
+REVOKE: Removes access or privileges from users or roles.
+Examples:
+Granting permission:
+
+sql
+Copy code
+GRANT SELECT, INSERT ON Employees TO 'username';
+Revoking permission:
+
+sql
+Copy code
+REVOKE INSERT ON Employees FROM 'username';
+4. TCL (Transaction Control Language):
+TCL commands are used to manage transactions in a database. A transaction is a unit of work that can include multiple DML operations that must either all succeed or all fail.
+
+Common TCL Commands:
+BEGIN TRANSACTION: Starts a transaction.
+COMMIT: Saves the changes made by the transaction.
+ROLLBACK: Undoes the changes made by the transaction.
+SAVEPOINT: Sets a point within a transaction to which you can roll back later.
+Examples:
+Transaction with commit and rollback:
+
+sql
+Copy code
+BEGIN TRANSACTION;
+
+UPDATE Accounts
+SET Balance = Balance - 500
+WHERE AccountID = 1;
+
+UPDATE Accounts
+SET Balance = Balance + 500
+WHERE AccountID = 2;
+
+IF @@ERROR <> 0
+    ROLLBACK;
+ELSE
+    COMMIT;
+Savepoint example:
+
+sql
+Copy code
+BEGIN TRANSACTION;
+
+UPDATE Employees SET Salary = 60000 WHERE EmployeeID = 101;
+
+SAVEPOINT BeforeBonus;
+
+UPDATE Employees SET Salary = 65000 WHERE EmployeeID = 101;
+
+-- If needed, rollback to savepoint
+ROLLBACK TO BeforeBonus;
+
+COMMIT;
+5. DQL (Data Query Language):
+DQL primarily consists of the SELECT statement, which is used to query the data from a database. While sometimes classified under DML, DQL is often treated separately because it retrieves data rather than modifying it.
+
+Common DQL Commands:
+SELECT: Retrieves data from the database based on specified conditions.
+Examples:
+Basic select query:
+
+sql
+Copy code
+SELECT FirstName, LastName, Salary
+FROM Employees;
+Select with condition:
+
+sql
+Copy code
+SELECT FirstName, LastName, Salary
+FROM Employees
+WHERE Salary > 50000;
+Select with join:
+
+sql
+Copy code
+SELECT E.FirstName, E.LastName, D.DepartmentName
+FROM Employees E
+INNER JOIN Departments D
+ON E.DepartmentID = D.DepartmentID;

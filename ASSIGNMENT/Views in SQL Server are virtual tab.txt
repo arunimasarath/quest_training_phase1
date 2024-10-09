@@ -1,0 +1,104 @@
+Views in SQL Server are virtual tables that present the result of a SELECT query. They are useful for abstracting complex queries, improving security, and simplifying data access. However, they come with certain limitations. Here are some key limitations of views:
+
+1. No Data Storage:
+Views do not store data physically. They only store the SQL query, and the result set is generated dynamically each time the view is queried.
+This means that querying a view on a large dataset might have performance implications, as the underlying tables are queried every time.
+Limitation: Performance issues with complex views on large datasets.
+
+2. Cannot Modify Data in Some Cases:
+Non-Updatable Views: Views that include the following cannot be updated directly:
+Aggregation functions (e.g., SUM(), COUNT(), AVG())
+DISTINCT
+GROUP BY, HAVING, UNION
+Subqueries in the SELECT clause
+Joins (in some cases)
+Computed columns or derived columns
+Example:
+
+sql
+Copy code
+CREATE VIEW EmployeeSummary AS
+SELECT DepartmentID, COUNT(*) AS TotalEmployees
+FROM Employees
+GROUP BY DepartmentID;
+This view cannot be updated directly because it includes a GROUP BY and aggregation.
+
+Limitation: Views with complex queries are read-only and cannot be used for data modification (e.g., INSERT, UPDATE, DELETE).
+
+3. Restrictions on ORDER BY Clause:
+A view cannot contain an ORDER BY clause unless the TOP keyword is also used. If you need to return ordered results from a view, you must include ORDER BY in the query that selects from the view, not within the view itself.
+Example (Invalid):
+
+sql
+Copy code
+CREATE VIEW SortedEmployees AS
+SELECT FirstName, LastName
+FROM Employees
+ORDER BY LastName;  -- This will throw an error.
+Example (Valid):
+
+sql
+Copy code
+CREATE VIEW TopEmployees AS
+SELECT TOP 10 FirstName, LastName
+FROM Employees
+ORDER BY LastName;
+Limitation: ORDER BY cannot be used in views unless combined with the TOP clause.
+
+4. No Support for FULL OUTER JOIN in Indexed Views:
+In indexed views (also called materialized views, which store the result set physically for performance reasons), SQL Server does not allow the use of FULL OUTER JOIN due to the complexities of maintaining the index.
+Limitation: Indexed views do not support FULL OUTER JOIN.
+
+5. Schema Binding Restrictions:
+If a view is created with the WITH SCHEMABINDING option (which binds the view to the schema of the underlying tables to prevent changes to those tables), you cannot alter or drop the underlying tables without dropping the view first.
+Example:
+
+sql
+Copy code
+CREATE VIEW EmployeeInfo
+WITH SCHEMABINDING
+AS
+SELECT FirstName, LastName
+FROM dbo.Employees;
+If the view is schema-bound, any attempt to change or drop the Employees table will fail.
+
+Limitation: Views with SCHEMABINDING require careful management of schema changes.
+
+6. Cannot Use Temporary Tables or Table Variables:
+A view cannot reference temporary tables (#TempTable) or table variables (@TableVar).
+Example (Invalid):
+
+sql
+Copy code
+CREATE VIEW EmployeeTempData AS
+SELECT * FROM #TempEmployees;  -- This will throw an error.
+Limitation: Temporary tables and table variables cannot be used in views.
+
+7. Performance Considerations:
+Views that depend on multiple large tables (especially those involving joins, subqueries, or aggregation) can cause performance bottlenecks.
+If the view is not indexed, each time it is queried, SQL Server must recompute the result by scanning the underlying tables.
+Limitation: Views can suffer from performance issues if they are complex or deal with large datasets.
+
+8. No Parameters:
+Views cannot accept parameters. If you need to pass dynamic input to a view, you have to do it via a stored procedure or by applying WHERE conditions on the view when querying it.
+Example (Invalid):
+
+sql
+Copy code
+CREATE VIEW EmployeeByDepartment (@DeptID INT) AS
+SELECT FirstName, LastName
+FROM Employees
+WHERE DepartmentID = @DeptID;  -- This will throw an error.
+Limitation: Views cannot accept parameters like stored procedures.
+
+9. ALTER TABLE Impact:
+If you alter the structure of a table that a view is based on (e.g., add or remove columns), the view might not automatically recognize these changes unless it is dropped and recreated.
+Limitation: Views do not automatically adjust to changes in the schema of the underlying tables.
+
+10. Limited Use of Triggers:
+You cannot create triggers on views. Triggers can only be created on tables.
+Limitation: Views cannot have triggers associated with them.
+
+11. Nested Views:
+Views can reference other views (nested views), but if a view is deeply nested, performance can degrade significantly. Complex dependency chains can make it difficult to optimize queries.
+Limitation: Deeply nested views can hurt performance and make debugging difficult.
