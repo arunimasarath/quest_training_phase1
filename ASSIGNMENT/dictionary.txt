@@ -1,0 +1,41 @@
+// adding
+Dictionary<int, string> dict = new Dictionary<int, string>();
+dict.Add(1, "One");
+
+// modifying
+dict[1] = "One";
+
+// accessing
+string value = dict[1];
+
+// key checking
+if (dict.ContainsKey(1))
+{
+    Console.WriteLine("Key exists");
+}
+
+// value checking
+if (dict.ContainsValue("One"))
+{
+    Console.WriteLine("Value exists");
+}
+
+// remove
+dict.Remove(1);
+
+// clear
+dict.Clear();
+
+// keys and values
+foreach (int key in dict.Keys)
+{
+    Console.WriteLine(key);
+}
+
+foreach (string value1 in dict.Values)
+{
+    Console.WriteLine(value1);
+}
+
+// count
+int count = dict.Count;

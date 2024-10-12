@@ -1,0 +1,102 @@
+1. *Clear()*
+- *Description*: Sets a range of elements in an array to their default value (e.g., 0 for integers, null for reference types).
+- *Syntax*: Array.Clear(array, index, length)
+- *Example*:
+  
+  int[] numbers = { 10, 20, 30, 40, 50 };
+  Array.Clear(numbers, 1, 3); // Clear 3 elements starting from index 1
+  Console.WriteLine(string.Join(", ", numbers)); // Output: 10, 0, 0, 0, 50
+ 
+
+ 2. *Clone()*
+- *Description*: Creates a shallow copy of the array.
+- *Syntax*: Array.Clone()
+- *Example*:
+ 
+  int[] numbers = { 1, 2, 3 };
+  int[] clonedArray = (int[])numbers.Clone(); // Clone the array
+  Console.WriteLine(string.Join(", ", clonedArray)); // Output: 1, 2, 3
+
+
+ 3. *Copy()*
+- *Description*: Copies a range of elements from one array to another.
+- *Syntax*: Array.Copy(sourceArray, destinationArray, length)
+- *Example*:
+  
+  int[] source = { 1, 2, 3, 4, 5 };
+  int[] destination = new int[3];
+  Array.Copy(source, destination, 3); // Copy first 3 elements
+  Console.WriteLine(string.Join(", ", destination)); // Output: 1, 2, 3
+
+
+ 4. *Equals()*
+- *Description*: Determines whether two arrays are equal by comparing their elements.
+- *Syntax*: Array.Equals(array1, array2)
+- *Example*:
+ 
+  int[] array1 = { 1, 2, 3 };
+  int[] array2 = { 1, 2, 3 };
+  bool areEqual = array1.SequenceEqual(array2); // Use LINQ for element-wise comparison
+  Console.WriteLine("Arrays are equal: " + areEqual); // Output: Arrays are equal: True
+  
+
+ 5. *Find()*
+- *Description*: Searches for an element that matches a specified condition and returns the first matching element.
+- *Syntax*: Array.Find(array, match)
+- *Example*:
+  
+  int[] numbers = { 1, 2, 3, 4, 5 };
+  int result = Array.Find(numbers, x => x > 3); // Find first number greater than 3
+  Console.WriteLine("Found: " + result); // Output: Found: 4
+  
+
+ 6. *GetLength()*
+- *Description*: Returns the number of elements in a specified dimension of the array.
+- *Syntax*: array.GetLength(dimension)
+- *Example*:
+  
+  int[,] matrix = { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+  Console.WriteLine("Length of 1st dimension: " + matrix.GetLength(0)); // Output: 3 (rows)
+  Console.WriteLine("Length of 2nd dimension: " + matrix.GetLength(1)); // Output: 2 (columns)
+  
+
+ 7. *Resize()*
+- *Description*: Changes the size of the array, creating a new array and copying the elements from the old array.
+- *Syntax*: Array.Resize(ref array, newSize)
+- *Example*:
+  
+  int[] numbers = { 1, 2, 3 };
+  Array.Resize(ref numbers, 5); // Resize array to length 5
+  Console.WriteLine(string.Join(", ", numbers)); // Output: 1, 2, 3, 0, 0 (new elements are initialized to 0)
+  
+
+ 8. *Reverse()*
+- *Description*: Reverses the order of the elements in a one-dimensional array.
+- *Syntax*: Array.Reverse(array)
+- *Example*:
+  
+  int[] numbers = { 1, 2, 3, 4, 5 };
+  Array.Reverse(numbers);
+  Console.WriteLine(string.Join(", ", numbers)); // Output: 5, 4, 3, 2, 1
+  
+
+ 9. *Sort()*
+- *Description*: Sorts the elements in a one-dimensional array in ascending order.
+- *Syntax*: Array.Sort(array)
+- *Example*:
+  
+  int[] numbers = { 5, 3, 1, 4, 2 };
+  Array.Sort(numbers);
+  Console.WriteLine(string.Join(", ", numbers)); // Output: 1, 2, 3, 4, 5
+  
+
+ 10. *ToString()*
+- *Description*: Converts the array to a string representation. However, this will not give you the contents of the array; instead, it will return the type of the array. You usually want to use string.Join() for a readable output.
+- *Syntax*: array.ToString()
+- *Example*:
+  
+  int[] numbers = { 1, 2, 3 };
+  Console.WriteLine(numbers.ToString()); // Output: System.Int32[]
+  
+  // Use string.Join for a readable format
+  Console.WriteLine(string.Join(", ", numbers)); // Output: 1, 2, 3

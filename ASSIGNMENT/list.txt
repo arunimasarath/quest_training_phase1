@@ -1,0 +1,74 @@
+//1. Add:-Adds an element to the end of the List<T>.
+List<int> numbers1 = new List<int>();
+numbers1.Add(10);
+numbers1.Add(20);
+numbers1.Add(30);
+
+foreach (int num in numbers1)
+{
+    Console.WriteLine(num);
+}
+
+//2.Insert():-Inserts an element into the list at the specified index.
+List<int> numbers2 = new List<int> { 10, 20, 30 };
+numbers2.Insert(1, 15); // Insert 15 at index 1
+
+foreach (int num in numbers2)
+{
+    Console.WriteLine(num);
+}
+
+//3.Remove():- Removes the first occurrence of a specific object from the List<T>.
+List<int> numbers3 = new List<int> { 10, 20, 30 };
+numbers3.Remove(20); // Removes the first occurrence of 20
+
+foreach (int num in numbers3)
+{
+    Console.WriteLine(num);
+}
+
+//4.RemoveAt():-Removes the element at the specified index from the List<T>.
+List<int> numbers4 = new List<int> { 10, 20, 30 };
+numbers4.RemoveAt(1); // Removes the element at index 1
+
+foreach (int num in numbers4)
+{
+    Console.WriteLine(num);
+}
+
+//5.Contains():- Determines whether an element exists in the List<T>.
+List<int> numbers5 = new List<int> { 10, 20, 30 };
+bool exists = numbers5.Contains(20);
+
+Console.WriteLine(exists); // True
+
+//6.IndexOf():-Returns the index of the first occurrence of a specific item in the list.
+List<int> numbers6 = new List<int> { 10, 20, 30 };
+int index = numbers6.IndexOf(20);
+
+Console.WriteLine(index); // 1
+
+//7.Sort():-Sorts the elements of the list in ascending order.
+List<int> numbers7 = new List<int> { 30, 10, 20 };
+numbers7.Sort();
+
+foreach (int num in numbers7)
+{
+    Console.WriteLine(num);
+}
+
+//8.Count:- Gets the total number of elements in the List<T>.
+List<int> numbers8 = new List<int> { 10, 20, 30 };
+int count = numbers8.Count;
+
+Console.WriteLine(count); // 3
+
+//9.Clear():-Removes all the elements from the List< T >.
+List<int> numbers9 = new List<int> { 10, 20, 30 };
+numbers9.Clear();
+
+Console.WriteLine(numbers9.Count); // 0
+
+//10.ForEach():-Executes a specified action on each element of the list.
+List<int> numbers10 = new List<int> { 10, 20, 30 };
+numbers10.ForEach(num => Console.WriteLine(num));

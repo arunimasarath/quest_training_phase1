@@ -1,0 +1,413 @@
+1. What is a string in C#?
+A. A sequence of numeric values
+B. A sequence of characters
+C. A sequence of boolean values
+D. None of the above
+
+Answer: B
+Explanation: A string is a sequence of characters in C# and other programming languages.
+
+
+
+2. Which of the following is a correct way to declare a string in C#?
+A. char name = "John";
+B. string name = "John";
+C. int name = 'John';
+D. boolean name = "John";
+
+Answer: B
+Code Example:
+
+string name = "John";
+
+
+
+3. What will the following code output?
+
+string str = "Hello World";
+Console.WriteLine(str.Length);
+A. 11
+B. 12
+C. 10
+D. 13
+
+Answer: A
+Explanation: The Length property of the string returns the number of characters, which is 11 for "Hello World".
+
+
+
+4. Which method is used to convert a string to lowercase in C#?
+A. ToLower()
+B. ToUpper()
+C. ToCharArray()
+D. LowerCase()
+
+Answer: A
+Code Example:
+
+string str = "HELLO";
+Console.WriteLine(str.ToLower());  // Output: hello
+
+
+5. Which method removes whitespace from the beginning and end of a string?
+A. Trim()
+B. Replace()
+C. Substring()
+D. PadLeft()
+
+Answer: A
+Code Example:
+string str = "   Hello   ";
+Console.WriteLine(str.Trim());  // Output: "Hello"
+
+
+6. What is the output of the following code?
+
+string str = "CSharp";
+Console.WriteLine(str.Substring(1, 4));
+A. "Shar"
+B. "Char"
+C. "Sharp"
+D. "CSha"
+
+Answer: A
+Explanation: The Substring() method returns a substring starting at index 1 and takes the next 4 characters, resulting in "Shar".
+
+
+7. Which of the following methods can be used to compare two strings in C#?
+A. String.Compare()
+B. == operator
+C. Both A and B
+D. None of the above
+
+Answer: C
+Code Example:
+
+
+string str1 = "apple";
+string str2 = "banana";
+Console.WriteLine(string.Compare(str1, str2));  // Output: -1
+Console.WriteLine(str1 == str2);                // Output: False
+
+
+8. How to concatenate two strings in C#?
+A. Using the + operator
+B. Using the Concat() method
+C. Both A and B
+D. None of the above
+
+Answer: C
+Code Example:
+
+string first = "Hello";
+string second = "World";
+Console.WriteLine(first + " " + second);            // Output: Hello World
+Console.WriteLine(string.Concat(first, second));    // Output: HelloWorld
+
+
+9. What will the following code output?
+
+string str = "Hello";
+Console.WriteLine(str.IndexOf('e'));
+A. 0
+B. 1
+C. 2
+D. -1
+
+Answer: B
+Explanation: The IndexOf() method returns the index of the first occurrence of the specified character, which is 1 for 'e'.
+
+10. What is the result of this code?
+string str = "CSharp";
+Console.WriteLine(str.Contains("Shar"));
+A. True
+B. False
+
+Answer: A
+Explanation: The Contains() method checks if the string "Shar" is present in "CSharp", which it is.
+
+11. Which method is used to convert a string to uppercase in C#?
+A. ToUpper()
+B. ToLower()
+C. ToCharArray()
+D. UpperCase()
+
+Answer: A
+Code Example:
+
+
+string str = "hello";
+Console.WriteLine(str.ToUpper());  // Output: HELLO
+
+
+12. What is the output of this code?
+
+string str = "  CSharp  ";
+Console.WriteLine(str.TrimStart());
+A. "CSharp"
+B. " CSharp"
+C. "CSharp "
+D. "CSharp "
+
+Answer: C
+Explanation: The TrimStart() method removes whitespaces from the beginning of the string only.
+
+
+13. What will the following code return?
+
+string str = "CSharp";
+Console.WriteLine(str.Replace("Sharp", "Code"));
+A. "CCode"
+B. "CSharp"
+C. "CodeSharp"
+D. "CSharpCode"
+
+Answer: A
+Explanation: The Replace() method replaces occurrences of "Sharp" with "Code", resulting in "CCode".
+
+14. Which of the following checks if a string starts with a specific substring?
+A. EndsWith()
+B. StartsWith()
+C. Substring()
+D. IndexOf()
+
+Answer: B
+Code Example:
+
+string str = "CSharp";
+Console.WriteLine(str.StartsWith("C"));  // Output: True
+
+
+15. What is the output of this code?
+
+string str = "hello";
+Console.WriteLine(str.Insert(1, "ey"));
+A. "heyello"
+B. "heyllo"
+C. "hheyello"
+D. "hleylo"
+
+Answer: B
+Explanation: The Insert() method inserts "ey" at index 1, resulting in "heyllo".
+
+16. How to convert a string to an array of characters?
+A. Split()
+B. ToCharArray()
+C. ToArray()
+D. CharArray()
+
+Answer: B
+Code Example:
+
+string str = "hello";
+char[] charArray = str.ToCharArray();
+
+
+17. What does the following code return?
+
+string str = "hello world";
+Console.WriteLine(str.Split(' ')[1]);
+A. "hello"
+B. "world"
+C. " "
+D. None of the above
+
+Answer: B
+Explanation: The Split() method splits the string by spaces, and str.Split(' ')[1] refers to the second word, "world".
+
+18. How do you check if a string is empty or null in C#?
+A. IsNullOrWhiteSpace()
+B. IsNullOrEmpty()
+C. == null
+D. Both A and B
+
+Answer: D
+Code Example:
+
+string str = null;
+Console.WriteLine(string.IsNullOrEmpty(str));  // Output: True
+Console.WriteLine(string.IsNullOrWhiteSpace(str));  // Output: True
+
+
+19. Which method appends a string at the end of another string?
+A. Append()
+B. Concat()
+C. +
+D. All of the above
+
+Answer: D
+Code Example:
+
+string first = "Hello";
+string second = "World";
+Console.WriteLine(first + second);           // Output: HelloWorld
+Console.WriteLine(string.Concat(first, second));  // Output: HelloWorld
+
+
+20. What will the following code output?
+
+string str = "hello";
+Console.WriteLine(str.Remove(1, 2));
+A. "ho"
+B. "helo"
+C. "hlo"
+D. "he"
+
+Answer: C
+Explanation: The Remove() method removes 2 characters starting at index 1, resulting in "hlo".
+
+
+
+21. Which method is used to remove all the leading and trailing whitespace characters from a string?
+A. TrimStart()
+B. TrimEnd()
+C. Trim()
+D. Replace()
+
+Answer: C
+Explanation: The Trim() method removes all leading and trailing whitespace characters from a string.
+
+22. What does the following C# code return?
+
+string str = "hello world";
+Console.WriteLine(str.ToUpper().Replace("WORLD", "EVERYONE"));
+A. "HELLO EVERYONE"
+B. "HELLO WORLD"
+C. "HELLO"
+D. "EVERYONE"
+
+Answer: A
+Explanation: The string is converted to uppercase and "WORLD" is replaced by "EVERYONE", resulting in "HELLO EVERYONE".
+
+23. What will this code print in C#?
+
+string str = "This is C#";
+Console.WriteLine(str.LastIndexOf('i'));
+A. 2
+B. 5
+C. 3
+D. -1
+
+Answer: B
+Explanation: The LastIndexOf() method finds the last occurrence of 'i', which is at index 5.
+
+24. In C#, which method is used to join an array of strings into a single string?
+A. Join()
+B. Concat()
+C. Split()
+D. Format()
+
+Answer: A
+Code Example:
+
+string[] words = { "Hello", "World", "C#" };
+string joinedString = string.Join(" ", words);  // Output: Hello World C#
+25. What is the result of the following code?
+
+string str = "abc123";
+Console.WriteLine(str.Remove(3));
+A. "123"
+B. "abc"
+C. "abc12"
+D. "123abc"
+
+Answer: B
+Explanation: The Remove() method removes all characters after index 3, so the result is "abc".
+
+26. How can you check if two strings are equal in C# without considering case sensitivity?
+A. ==
+B. Equals()
+C. Compare()
+D. Equals(StringComparison.OrdinalIgnoreCase)
+
+Answer: D
+Code Example:
+
+string str1 = "HELLO";
+string str2 = "hello";
+Console.WriteLine(str1.Equals(str2, StringComparison.OrdinalIgnoreCase));  // Output: True
+
+
+27. What is the output of this code?
+
+string str = "abcd";
+Console.WriteLine(str.PadLeft(6, '*'));
+A. "abcd"
+B. "abcd"
+C. "****abcd"
+D. "ab**cd"
+
+Answer: A
+Explanation: The PadLeft() method adds padding to the left of the string until its length is 6, so "**abcd" is the result.
+
+28. How can you split a string by a comma delimiter in C#?
+A. ToCharArray()
+B. Substring()
+C. Split(',')
+D. Concat()
+
+Answer: C
+Code Example:
+
+string str = "apple,banana,orange";
+string[] fruits = str.Split(',');
+
+
+29. What does this C# code return?
+
+string str = "hello";
+Console.WriteLine(str.Replace('l', 'x'));
+A. "hexxo"
+B. "hxxlo"
+C. "hxlxo"
+D. "hello"
+
+Answer: A
+Explanation: The Replace() method replaces all occurrences of 'l' with 'x', resulting in "hexxo".
+
+30. Which method checks if a string ends with a specified substring?
+A. StartsWith()
+B. EndsWith()
+C. Contains()
+D. IndexOf()
+
+Answer: B
+Code Example:
+
+string str = "CSharp";
+Console.WriteLine(str.EndsWith("Sharp"));  // Output: True
+31. How can you reverse a string in C#?
+A. Reverse()
+B. Array.Reverse()
+C. Convert to char array and then reverse
+D. Both B and C
+
+Answer: D
+Code Example:
+
+string str = "hello";
+char[] charArray = str.ToCharArray();
+Array.Reverse(charArray);
+string reversedStr = new string(charArray);  // Output: "olleh"
+
+
+32. Which function will return the number of occurrences of a substring in a string?
+A. Count()
+B. IndexOf()
+C. Custom loop to count occurrences
+D. Substring()
+
+Answer: C
+Explanation: There is no built-in method to count substring occurrences directly, but it can be done using loops.
+
+33. What will the following code output?
+
+string str = "apple, orange, banana";
+Console.WriteLine(str.Split(',').Length);
+A. 1
+B. 2
+C. 3
+D. 4
+
+Answer: C
+Explanation: The string is split by commas, resulting in 3 parts.
