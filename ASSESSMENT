@@ -1,0 +1,145 @@
+using System;
+using System.Collections.Generic;
+
+namespace ASSESSMENT_PATIENT
+{
+    internal class Program
+    {
+        static List<Dictionary<string, string>> patientList = new List<Dictionary<string, string>>();
+
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+               
+                Console.WriteLine("1. Add Patient's Details");
+                Console.WriteLine("2. Search Patient");
+                Console.WriteLine("3. Update Patient");
+                Console.WriteLine("4. List Admitted Patients");
+                Console.WriteLine("5. Exit");
+                Console.Write("Enter your choice: ");
+                var display = Console.ReadLine();
+
+                switch (display)
+                {
+                    case "1":
+                        AddPatientDetails();
+                        break;
+                    case "2":
+                        GetPatientDetails();
+                        break;
+                    case "3":
+                        UpdatePatientDetails();
+                        break;
+                    case "4":
+                        ListAdmittedPatients();
+                        break;
+                    case "5":
+                        Console.WriteLine("Exiting the system.");
+                        return;
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
+            }
+        }
+
+        static void AddPatientDetails()
+        {
+            var patient_system = new Dictionary<string, string>();
+
+            Console.WriteLine("Adding New Patient");
+            Console.Write("Enter the Patient ID Number: ");
+            patient_system.Add("id", Console.ReadLine());
+
+            Console.Write("Enter the Patient's name: ");
+            patient_system.Add("name", Console.ReadLine());
+
+            Console.Write("Enter the Patient's age: ");
+            patient_system.Add("age", Console.ReadLine());
+
+            Console.Write("Enter Patient's Mobile Number: ");
+            patient_system.Add("mobile_no", Console.ReadLine());
+
+            Console.Write("Enter the disease: ");
+            patient_system.Add("diagnosis", Console.ReadLine());
+
+            Console.Write("Status of Patient (admitted/discharged): ");
+            patient_system.Add("status", Console.ReadLine());
+
+            patientList.Add(patient_system);
+            Console.WriteLine("Patient details added successfully.");
+        }
+
+        static void GetPatientDetails()
+        {
+            Console.Write("Enter Patient ID: ");
+            var id = Console.ReadLine();
+
+            foreach (var patient in patientList)
+            {
+                if (patient["id"] == id)
+                {
+                    Console.WriteLine("Name: " + patient["name"]);
+                    Console.WriteLine("Age: " + patient["age"]);
+                    Console.WriteLine("Mobile Number: " + patient["mobile_no"]);
+                    Console.WriteLine("Disease: " + patient["diagnosis"]);
+                    Console.WriteLine("Status: " + patient["status"]);
+                    return;
+                }
+            }
+
+            Console.WriteLine("Patient not found.");
+        }
+
+        static void UpdatePatientDetails()
+        {
+            Console.Write("Enter Patient's Name to Update: ");
+            string name = Console.ReadLine();
+
+            foreach (var patient in patientList)
+            {
+                if (patient["name"].Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.Write("Enter new Diagnosis (or press Enter to skip): ");
+                    string newDiagnosis = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(newDiagnosis))
+                    {
+                        patient["diagnosis"] = newDiagnosis;
+                        Console.WriteLine("Diagnosis updated successfully.");
+                    }
+
+                    Console.Write("Enter new Status (admitted/discharged) or press Enter to skip: ");
+                    string newStatus = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(newStatus))
+                    {
+                        patient["status"] = newStatus;
+                        Console.WriteLine("Status updated successfully.");
+                    }
+
+                    return;
+                }
+            }
+
+            Console.WriteLine("Patient not found.");
+        }
+
+        static void ListAdmittedPatients()
+        {
+            bool found = false;
+            foreach (var patient in patientList)
+            {
+                if (patient["status"].Equals("admitted", StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("ID: " + patient["id"] + ", Name: " + patient["name"] + ", Disease: " + patient["diagnosis"]);
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                Console.WriteLine("No admitted patients found.");
+            }
+        }
+    }
+}
+
