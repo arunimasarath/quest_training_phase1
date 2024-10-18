@@ -1,0 +1,5 @@
+﻿Build started at 00:07...
+1>------ Build started: Project: files, Configuration: Debug Any CPU ------
+1>  files -> C:\Users\USER\source\repos\static2\files\bin\Debug\files.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+========== Build completed at 00:07 and took 00.151 seconds ==========
