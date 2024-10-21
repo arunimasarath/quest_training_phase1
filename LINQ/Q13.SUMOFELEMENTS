@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> list = new List<int> { 10, 20, 30,40 };
+        var sum = list.Sum();
+        Console.WriteLine("Sum of all elements: " + sum);
+    }
+}

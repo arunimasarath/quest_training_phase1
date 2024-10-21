@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> list = new List<int> { 10,29,30,43,50,69,70,80,90,-10,-20,-30};
+        var evenNumbers = list.Where(x => x % 2 == 0).ToList();
+        Console.WriteLine("Even Numbers: " + string.Join(", ", evenNumbers));
+    }
+}

@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> list = new List<int> { 3, 4, 5, -2, -9,-8,10 };
+        var Positive = list.All(x => x > 0);
+        Console.WriteLine("All numbers are positive: " + Positive);
+    }
+}

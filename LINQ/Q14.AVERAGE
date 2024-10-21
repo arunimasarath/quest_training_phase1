@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<double> list = new List<double> { 10, 20, 30,40,50 };
+        var average = list.Average();
+        Console.WriteLine("Average Of the Numbers are: " + average);
+    }
+}

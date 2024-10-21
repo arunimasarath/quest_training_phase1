@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> list = new List<int> { 20, 10, 5, 9, 8 };
+        var squareOfEvenNumbers = list.Where(x => x % 2 == 0).Select(x => x * x).ToList();
+        Console.WriteLine("Squares of even numbers: " + string.Join(", ", squareOfEvenNumbers));
+    }
+}

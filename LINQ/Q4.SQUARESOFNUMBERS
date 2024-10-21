@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> list = new List<int> { 15, 25, 50 };
+        var squaresofnumbers = list.Select(x => x * x).ToList();
+        Console.WriteLine("Squares: " + string.Join(", ", squaresofnumbers));
+    }
+}

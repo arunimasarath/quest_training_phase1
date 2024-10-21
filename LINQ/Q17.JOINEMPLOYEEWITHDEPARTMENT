@@ -1,0 +1,39 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Department
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+class Employee
+{
+    public string Name { get; set; }
+    public int Id { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        var employees = new List<Employee>
+        {
+            new Employee { Name = "Arunima", Id = 1 },
+            new Employee { Name = "Bhanu", Id = 2 },
+            new Employee { Name = "Navaneeth", Id = 3 }
+        };
+
+        var departments = new List<Department>
+        {
+            new Department { Id = 1, Name = "IT" },
+            new Department { Id = 2, Name = "IT" },
+            new Department { Id = 3, Name = "HR" },
+        };
+
+        employees.Join(departments, e => e.Id, d => d.Id, (e, d) => $"{e.Name} works as {d.Name}")
+                 .ToList()
+                 .ForEach(Console.WriteLine);
+    }
+}

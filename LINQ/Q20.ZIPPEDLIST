@@ -1,0 +1,15 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        var zippedlist = new List<string> { "Apple", "Brinjal" }
+            .Zip(new List<string> { "Fruits", "Vegetables" }, (name, category) => $"{name} belongs to {category}");
+
+        foreach (var item in zippedlist)
+            Console.WriteLine(item);
+    }
+}

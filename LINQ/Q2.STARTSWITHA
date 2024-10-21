@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> list = new List<int> { 5, 2, 9, 1, 7 };
+        var sortedDescending = list.OrderByDescending(x => x).ToList();
+        Console.WriteLine("Sorted in descending order: " + string.Join(", ", sortedDescending));
+    }
+}

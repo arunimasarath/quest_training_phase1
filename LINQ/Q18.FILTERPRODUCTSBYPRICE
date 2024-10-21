@@ -1,0 +1,31 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Product
+{
+    public string Name { get; set; }
+    public double Price { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        List<Product> products = new List<Product>
+        {
+            new Product { Name = "IPHONE 15 PRO MAX", Price = 157000 },
+            new Product { Name = "IPHONE 13", Price = 60000 },
+            new Product { Name = "IPHONE 16", Price = 82000 }
+        };
+
+        var filterAndSortProducts = products.Where(p => p.Price > 100)
+                                                .OrderBy(p => p.Price)
+                                                .ToList();
+
+        foreach (var product in filterAndSortProducts)
+        {
+            Console.WriteLine($"{product.Name}: {product.Price}");
+        }
+    }
+}

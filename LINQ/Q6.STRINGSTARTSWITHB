@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<string> list = new List<string> { "ARUNIMA", "ARUNDHATHI", "BHANUPRIYA", "GRACE","ANGEL","FEMI" };
+        var firstStartingWithB = list.FirstOrDefault(x => x.StartsWith("B"));
+        Console.WriteLine("First string starting with B: " + firstStartingWithB);
+    }
+}

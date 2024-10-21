@@ -1,0 +1,16 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        var topStudents = new List<string> { "ARUNIMA", "BHANU", "GRACE" }
+            .Zip(new List<int> { 90, 46, 89 }, (student, grade) => new { student, grade })
+            .Where(x => x.grade > 80)
+            .Select(x => x.student);
+
+        Console.WriteLine("Students scoring above 80: " + string.Join(", ", topStudents));
+    }
+}

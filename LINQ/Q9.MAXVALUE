@@ -1,0 +1,13 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> list = new List<int> { 10, 90, 40, 56, 97 };
+        var maxValue = list.Max();
+        Console.WriteLine("Maximum value: " + maxValue);
+    }
+}

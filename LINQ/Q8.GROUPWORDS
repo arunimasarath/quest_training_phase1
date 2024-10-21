@@ -1,0 +1,16 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        var words = new List<string> { "TCS", "QUST GLOBAL", "IBM", "INFOSYS" }
+            .GroupBy(x => x.Length)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        foreach (var group in words)
+            Console.WriteLine($"Words with length {group.Key}: {string.Join(", ", group.Value)}");
+    }
+}
