@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp19
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string str = "movie";
+            Console.WriteLine("Palindrome of string is :" + Palindrome(str));
+        }
+        static bool Palindrome(string str)
+        {
+            return str == new string(str.Reverse().ToArray());
+        }
+
+
+
+
+            
+    }
+}
